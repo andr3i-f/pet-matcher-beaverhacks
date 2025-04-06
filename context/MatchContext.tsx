@@ -10,6 +10,7 @@ export interface MatchedPet {
   type?: string;
   species?: string;
   name?: string;
+  ShelterName?: string;
   description?: string;
   photos?: Array<{
     small?: string;
@@ -29,28 +30,18 @@ export interface MatchedPet {
 interface MatchContextType {
   matches: MatchedPet[] | undefined;
   setMatches: React.Dispatch<React.SetStateAction<MatchedPet[] | undefined>>;
-  currentMatchIndex: number;
-  setCurrentMatchIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const MatchContext = createContext<MatchContextType>({
-  matches: undefined, 
-  setMatches: () => {},
-  currentMatchIndex: 0,
-  setCurrentMatchIndex: () => {}
+  matches: undefined,
+  setMatches: () => {}
 });
 
 export const MatchProvider = ({ children } : {children: ReactNode}) => {
     const [matches, setMatches] = useState<MatchedPet[] | undefined>(undefined);
-    const [currentMatchIndex, setCurrentMatchIndex] = useState<number>(0);
     
     return (
-        <MatchContext.Provider value={{ 
-          matches, 
-          setMatches,
-          currentMatchIndex,
-          setCurrentMatchIndex
-        }}>
+        <MatchContext.Provider value={{ matches, setMatches }}>
             {children}
         </MatchContext.Provider>
     )

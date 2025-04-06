@@ -27,7 +27,7 @@ export default function HomeProvider() {
           position: "absolute",
           right: 16,
           width: 250,
-          height: "200vh",
+          height: "160vh",
           top: 0,
           backgroundImage: `url("/images/borderimage.png")`,
           backgroundRepeat: "repeat",

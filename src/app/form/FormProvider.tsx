@@ -50,25 +50,6 @@ const listImages = [
     "https://assets3.thrillist.com/v1/image/2717842/792x792/scale;webp=auto;jpeg_quality=60.jpg",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIZ2-mmpirQ5FfvjM51XsvDBWK4ADdx6p_bQ&s"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ]
     ;
 
@@ -85,9 +66,7 @@ export default function FormProvider() {
     const [fadeOut, setFadeOut] = useState(false);
     const [showIntro, setShowIntro] = useState(true);
     const [submitStatus, setSubmitStatus] = useState(null);
-    const [matchedPets, setMatchedPets] = useState(null);
-    console.log(setMatchedPets)
-    const { location, setLocation } = useContext(LocationContext);
+    const { location } = useContext(LocationContext);
     const { matches, setMatches } = useContext(MatchContext);
     console.log("Location from context:", location);
 
@@ -160,8 +139,8 @@ export default function FormProvider() {
         try {
             const result = await submitSelectedImages(selectedImages, location);
             if (result.success) {
-                setMatches(result.data)
-                console.log(result.data)
+                setMatches(result.data);
+                console.log("Matches set to context:", result.data);
                 router.push('/match');
             } else {
                 console.log('Failed to submit images:', result.error);
@@ -406,12 +385,31 @@ export default function FormProvider() {
                                 </Typography>
                             )}
 
-                            {matchedPets && (
+                            {matches && matches.length > 0 && (
                                 <Box sx={{ mt: 4 }}>
                                     <Typography variant="h6" sx={{ mb: 2, color: "#660F81" }}>
                                         Matched Pets
                                     </Typography>
-                                    {/* Display matched pets here */}
+                                    <Grid container spacing={2} justifyContent="center">
+                                        {matches.slice(0, 4).map((pet, idx) => (
+                                            <Grid item xs={6} sm={3} key={idx}>
+                                                <Paper
+                                                    sx={{
+                                                        width: 100,
+                                                        height: 100,
+                                                        backgroundImage: `url(${pet?.photos?.[0]?.small || pet?.primary_photo_cropped?.small || '/images/pet-placeholder.png'})`,
+                                                        backgroundSize: "cover",
+                                                        backgroundPosition: "center",
+                                                        borderRadius: 2,
+                                                        boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                                                    }}
+                                                />
+                                                <Typography variant="caption" sx={{ display: 'block', mt: 1 }}>
+                                                    {pet?.name || 'Pet'}
+                                                </Typography>
+                                            </Grid>
+                                        ))}
+                                    </Grid>
                                 </Box>
                             )}
                         </Box>
