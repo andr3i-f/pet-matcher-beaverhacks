@@ -2,7 +2,7 @@
 
 Pet Matcher helps users find their perfect pet companion by analyzing preferences from selected images and matching them with available adoptable animals in their area.
 
-![Pet Matcher Logo](public/pet-matcher-logo.png)
+![Pet Matcher Logo](/public/images/dogImage.png)
 
 ## 🐾 Features
 
@@ -45,7 +45,7 @@ Visit the deployed application at: [Pet Matcher App](https://pet-matcher-beaverh
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/pet-matcher-beaverhacks.git
+git clone https://github.com/andr3i-f/pet-matcher-beaverhacks.git
 cd pet-matcher-beaverhacks
 ```
 
@@ -71,7 +71,6 @@ npm run dev
 yarn dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 📂 Project Structure
 
@@ -94,7 +93,7 @@ The Pet Matcher backend API is available at:
 [https://pawfect-match-pi.vercel.app](https://pawfect-match-pi.vercel.app)
 
 The backend repository can be found here: 
-[Pet Matcher Backend](https://github.com/yourusername/pet-matcher-backend)
+[Pet Matcher Backend](https://github.com/M005A/pet-matcher-backend)
 
 ## 🤝 Contributing
 
@@ -110,6 +109,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 👏 Acknowledgments
 
-- [PetFinder API](https://www.petfinder.com/developers/) for providing adoptable pet data
-- [Google Gemini AI](https://deepmind.google/technologies/gemini/) for pet matching algorithms
+- [PetFinder API](https://www.petfinder.com/developers) for providing adoptable pet data
+- [Google Gemini AI](https://deepmind.google/technologies/gemini) for pet matching algorithms
 - The BeaverHacks hackathon for the inspiration
