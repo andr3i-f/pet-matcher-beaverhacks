@@ -61,11 +61,10 @@ export default function FormProvider() {
     const [showIntro, setShowIntro] = useState(true);
     const [submitStatus, setSubmitStatus] = useState(null);
     const [matchedPets, setMatchedPets] = useState(null);
-
+    console.log(setMatchedPets)
     const { location, setLocation } = useContext(LocationContext);
     const { matches, setMatches } = useContext(MatchContext);
     console.log("Location from context:", location);
-
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -137,7 +136,8 @@ export default function FormProvider() {
         try {
             const result = await submitSelectedImages(selectedImages, location);
             if (result.success) {
-                setMatches(JSON.parse(result.data))
+                setMatches(result.data)
+                console.log(result.data)
                 router.push('/match');
             } else {
                 console.log('Failed to submit images:', result.error);
