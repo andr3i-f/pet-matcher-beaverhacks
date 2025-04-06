@@ -8,7 +8,7 @@ export default function HomeProvider() {
     <Box
       sx={{
         width: "100%",
-        height: "calc(100vh - 64px)",
+        height: "165vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -26,7 +26,7 @@ export default function HomeProvider() {
           position: "absolute",
           right: 16,
           width: 250,
-          height: "160vh",
+          height: "180vh",
           top: 0,
           backgroundImage: `url("/images/borderimage.png")`,
           backgroundRepeat: "repeat",
@@ -37,7 +37,7 @@ export default function HomeProvider() {
 
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-        <Grid container spacing={4} sx={{ mt: 4 }}>
+        <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
             <Box sx={{ pt: { xs: 2, md: 8 } }}>
               <Typography
@@ -50,7 +50,7 @@ export default function HomeProvider() {
                   fontSize: { xs: '2.5rem', md: '3.5rem' }
                 }}
               >
-                Find Your Perfect Pet Match
+                Pawfect Match
               </Typography>
               <Typography
                 variant="h5"

@@ -11,9 +11,7 @@ const NavMenu = () => {
 
   // Navigation items
   const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Find Match', path: '/form' },
-    { name: 'My Matches', path: '/match' },
+    { name: '', path: '/' }
   ];
 
   return (
@@ -25,51 +23,33 @@ const NavMenu = () => {
         backdropFilter: 'blur(6px)',
         borderTopRightRadius: '12px',
         borderTopLeftRadius: '12px',
-
       }}
     >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            fontWeight: 'bold',
-            color: '#660F81',
-            fontFamily: `'Segoe UI', 'Comic Sans MS', cursive`,
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <img 
-            src="/images/pawImage.png" 
-            alt="Pet Matcher" 
-            style={{ 
-              height: '32px', 
-              marginRight: '10px',
-            }} 
-          />
-            Pet Matcher
-        </Typography>
-
-        <Box sx={{ display: 'flex' }}>
-          {navItems.map((item) => (
-            <Link href={item.path} key={item.path} passHref style={{ textDecoration: 'none' }}>
-              <Button
-                sx={{
-                  mx: 1,
-                  color: pathname === item.path ? '#d6336c' : '#660F81',
-                  fontWeight: pathname === item.path ? 'bold' : 'normal',
-                  borderBottom: pathname === item.path ? '2px solid #d6336c' : 'none',
-                  borderRadius: 0,
-                  '&:hover': {
-                    backgroundColor: 'rgba(214, 51, 108, 0.08)',
-                  },
+        <Link href="/">
+          <Button>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 'bold',
+                color: '#660F81',
+                fontFamily: `'Segoe UI', 'Comic Sans MS', cursive`,
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <img
+                src="/images/pawImage.png"
+                alt="Pet Matcher"
+                style={{
+                  height: '32px',
+                  marginRight: '10px',
                 }}
-              >
-                {item.name}
-              </Button>
-            </Link>
-          ))}
-        </Box>
+              />
+                Pawfect Match
+            </Typography>
+          </Button>
+        </Link>
       </Toolbar>
     </AppBar>
   );
