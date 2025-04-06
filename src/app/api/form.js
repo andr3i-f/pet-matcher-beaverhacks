@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function submitSelectedImages(selectedImages, location = null) {
   try {
-    const endpointUrl = 'http://localhost:5000/submitForm';
+    const endpointUrl = 'http://localhost:5001/submitForm';
 
     const params = {
       urls: JSON.stringify(selectedImages),  // Convert array to string
