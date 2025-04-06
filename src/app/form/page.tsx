@@ -1,5 +1,8 @@
+"use client"
+
+import React from "react";
+import FormProvider from "./FormProvider";
+
 export default function Home() {
-    return (
-        <h1>Form page. . .</h1>
-    )
+   return <FormProvider />;
 }
