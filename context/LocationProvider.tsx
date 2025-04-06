@@ -2,17 +2,12 @@
 
 import { createContext, useState, ReactNode, useContext, useEffect } from 'react';
 
-interface LocationContextType {
-  location: string;
-  setLocation: (location: string) => void;
-}
-
 interface LocationType {
     latitude: number;
     longitude: number;
 }
 
-const LocationContext = createContext<LocationContextType | undefined>(undefined);
+export const LocationContext = createContext(undefined);
 
 export const LocationProvider = ({ children }: { children: ReactNode }) => {
   const [location, setLocation] = useState<LocationType | undefined>();

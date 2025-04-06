@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Box, Stepper, Step, StepLabel, Button, Typography, Grid, Paper, Stack } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
-
+import { submitSelectedImages } from "../api/form";
+import { LocationContext } from "../../../context/LocationProvider";
 const steps = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6", "Step 7", "Step 8", "Step 9", "Step 10"];
 
 const listImages = [
@@ -55,6 +56,12 @@ export default function FormProvider() {
     const [fadeIn, setFadeIn] = useState(false);
     const [fadeOut, setFadeOut] = useState(false);
     const [showIntro, setShowIntro] = useState(true);
+    const [submitStatus, setSubmitStatus] = useState(null);
+    const [matchedPets, setMatchedPets] = useState(null);
+
+    const { location, setLocation } = useContext(LocationContext);
+    console.log("Location from context:", location);
+
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -119,6 +126,23 @@ export default function FormProvider() {
 
             return randomizedImages[imgIndex];
         });
+    };
+
+    const handleSubmitImages = async () => {
+        setIsLoading(true);
+        try {
+            const result = await submitSelectedImages(selectedImages, location);
+        
+            if (result.success) {
+                setMatchedPets(result.data);
+            } else {
+                console.error('Failed to submit images:', result.error);
+            }
+        } catch (error) {
+            console.error('Error submitting images:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -317,7 +341,7 @@ export default function FormProvider() {
                                     </Grid>
                                 ))}
                             </Grid>
-                            <Box sx={{ display: 'flex', justifyContent: 'center', pt: 4 }}>
+                            <Box sx={{ display: 'flex', justifyContent: 'center', pt: 4, gap: 2 }}>
                                 <Button
                                     variant="contained"
                                     onClick={handleReset}
@@ -331,7 +355,37 @@ export default function FormProvider() {
                                 >
                                     Start Again
                                 </Button>
+                                
+                                <Button
+                                    variant="contained"
+                                    onClick={handleSubmitImages}
+                                    disabled={isLoading || submitStatus === 'success'}
+                                    sx={{
+                                        bgcolor: '#660F81',
+                                        '&:hover': {
+                                            bgcolor: '#4a0b5c'
+                                        },
+                                        boxShadow: '0 2px 5px rgba(0,0,0,0.3)'
+                                    }}
+                                >
+                                    {isLoading ? 'Submitting...' : submitStatus === 'success' ? 'Submitted' : 'Find My Match'}
+                                </Button>
                             </Box>
+                            
+                            {submitStatus === 'error' && (
+                                <Typography color="error" sx={{ mt: 2 }}>
+                                    There was an error submitting your selections. Please try again.
+                                </Typography>
+                            )}
+                            
+                            {matchedPets && (
+                                <Box sx={{ mt: 4 }}>
+                                    <Typography variant="h6" sx={{ mb: 2, color: "#660F81" }}>
+                                        Matched Pets
+                                    </Typography>
+                                    {/* Display matched pets here */}
+                                </Box>
+                            )}
                         </Box>
                     ) : (
                         <Grid
