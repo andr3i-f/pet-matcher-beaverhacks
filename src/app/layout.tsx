@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { LocationProvider } from "../../context/LocationProvider";
 import { MatchProvider } from "../../context/MatchContext";
+import NavMenu from "../components/NavMenu";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <MatchProvider>
           <LocationProvider>
+            <NavMenu />
             {children}
           </LocationProvider>
         </MatchProvider>

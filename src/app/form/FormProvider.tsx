@@ -69,8 +69,8 @@ const listImages = [
 
 
 
-  ]
-  ;
+]
+    ;
 
 export default function FormProvider() {
     const router = useRouter();
@@ -261,57 +261,57 @@ export default function FormProvider() {
                         position: 'relative'
                     }}
                 >
-                    <Box sx={{ 
+                    <Box sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
                         position: 'relative'
                     }}>
-                    <Box
-                        sx={{
-                            position: 'relative',
-                            width: '100%',
-                            maxWidth: '800px',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            textAlign: 'center',
-                            mb: 4
-                        }}
-                    >
+                        <Box
+                            sx={{
+                                position: 'relative',
+                                width: '100%',
+                                maxWidth: '800px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                textAlign: 'center',
+                                mb: 4
+                            }}
+                        >
 
-                    </Box>
-                    
-                    <Box
-                        sx={{
-                            position: 'absolute',
-                            bottom: 90,
-                            right: 10,
-                            width: 420,
-                            height: 290,
-                            backgroundImage: `url("/images/pixel-speech-bubble.png")`,
-                            backgroundSize: "contain",
-                            backgroundRepeat: "no-repeat",
-                            backgroundPosition: "center",
-                            zIndex: 2
-                        }}
-                    >
-                    </Box>
-                    <Box
-                        sx={{
-                            position: 'absolute',
-                            bottom: -23,
-                            lef: 0,
-                            width: 400,
-                            height: 270,
-                            backgroundImage: `url("/images/dogImage.png")`,
-                            backgroundSize: "contain",
-                            backgroundRepeat: "no-repeat",
-                            backgroundPosition: "center",
-                            zIndex: 1
-                        }}
-                    />
+                        </Box>
+
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                bottom: 90,
+                                right: 10,
+                                width: 420,
+                                height: 290,
+                                backgroundImage: `url("/images/pixel-speech-bubble.png")`,
+                                backgroundSize: "contain",
+                                backgroundRepeat: "no-repeat",
+                                backgroundPosition: "center",
+                                zIndex: 2
+                            }}
+                        >
+                        </Box>
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                bottom: -23,
+                                lef: 0,
+                                width: 400,
+                                height: 270,
+                                backgroundImage: `url("/images/dogImage.png")`,
+                                backgroundSize: "contain",
+                                backgroundRepeat: "no-repeat",
+                                backgroundPosition: "center",
+                                zIndex: 1
+                            }}
+                        />
                         <Button variant="contained"
                             onClick={handleContinue}
                             sx={{
@@ -383,7 +383,7 @@ export default function FormProvider() {
                                 >
                                     Start Again
                                 </Button>
-                                
+
                                 <Button
                                     variant="contained"
                                     onClick={handleSubmitImages}
@@ -399,13 +399,13 @@ export default function FormProvider() {
                                     {isLoading ? 'Submitting...' : submitStatus === 'success' ? 'Submitted' : 'Find My Match'}
                                 </Button>
                             </Box>
-                            
+
                             {submitStatus === 'error' && (
                                 <Typography color="error" sx={{ mt: 2 }}>
                                     There was an error submitting your selections. Please try again.
                                 </Typography>
                             )}
-                            
+
                             {matchedPets && (
                                 <Box sx={{ mt: 4 }}>
                                     <Typography variant="h6" sx={{ mb: 2, color: "#660F81" }}>
