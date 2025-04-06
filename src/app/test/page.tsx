@@ -1,41 +1,25 @@
-"use client";
-
-import React, { useState } from "react";
+import { Box } from "@mui/material";
 import MatchCelebration from "./matchPopup";
 
-export default function TestMatchPopupPage() {
-  const [showPopup, setShowPopup] = useState(false);
-
+export default function Page() {
   return (
-    <main
-      style={{
+    <Box
+      sx={{
+        width: "100%",
+        height: "100vh",
         display: "flex",
-        flexDirection: "column",
         alignItems: "center",
-        marginTop: "4rem",
+        justifyContent: "center",
+        backgroundImage: `url("/images/background.png")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
-      <h1>🐾 Test Pet Match Popup</h1>
-
-      {!showPopup ? (
-        <button
-          onClick={() => setShowPopup(true)}
-          style={{
-            padding: "1rem 2rem",
-            background: "#22c55e",
-            color: "#fff",
-            fontSize: "1.25rem",
-            border: "none",
-            borderRadius: "12px",
-            cursor: "pointer",
-            marginTop: "2rem",
-          }}
-        >
-          Match with Fluffy!
-        </button>
-      ) : (
-        <MatchCelebration petName="Fluffy" />
-      )}
-    </main>
+      <MatchCelebration
+        petName="Fluffy"
+        image="https://cdn.pixabay.com/photo/2024/03/07/10/38/simba-8618301_1280.jpg"
+      />
+    </Box>
   );
 }
