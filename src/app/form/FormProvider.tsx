@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { submitSelectedImages } from "../api/form";
 import { LocationContext } from "../../../context/LocationProvider";
 import { useRouter } from 'next/navigation';
+import { MatchContext } from "../../../context/MatchContext";
 const steps = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6", "Step 7", "Step 8", "Step 9", "Step 10"];
 
 const listImages = [
@@ -62,6 +63,7 @@ export default function FormProvider() {
     const [matchedPets, setMatchedPets] = useState(null);
 
     const { location, setLocation } = useContext(LocationContext);
+    const { matches, setMatches } = useContext(MatchContext);
     console.log("Location from context:", location);
 
 
@@ -134,10 +136,8 @@ export default function FormProvider() {
         setIsLoading(true);
         try {
             const result = await submitSelectedImages(selectedImages, location);
-            console.log('Result from API:', result);
             if (result.success) {
-                localStorage.setItem('matchedPets', JSON.stringify(result.data));
-                
+                setMatches(JSON.parse(result.data))
                 router.push('/match');
             } else {
                 console.log('Failed to submit images:', result.error);
