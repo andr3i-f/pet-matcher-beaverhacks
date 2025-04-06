@@ -3,6 +3,7 @@ import { Box, Stepper, Step, StepLabel, Button, Typography, Grid, Paper, Stack }
 import CircularProgress from '@mui/material/CircularProgress';
 import { submitSelectedImages } from "../api/form";
 import { LocationContext } from "../../../context/LocationProvider";
+import { useRouter } from 'next/navigation';
 const steps = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6", "Step 7", "Step 8", "Step 9", "Step 10"];
 
 const listImages = [
@@ -46,6 +47,7 @@ const listImages = [
   ;
 
 export default function FormProvider() {
+    const router = useRouter();
     const [activeStep, setActiveStep] = useState(0);
     const [randomizedImages, setRandomizedImages] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -132,14 +134,16 @@ export default function FormProvider() {
         setIsLoading(true);
         try {
             const result = await submitSelectedImages(selectedImages, location);
-        
+            console.log('Result from API:', result);
             if (result.success) {
-                setMatchedPets(result.data);
+                localStorage.setItem('matchedPets', JSON.stringify(result.data));
+                
+                router.push('/match');
             } else {
-                console.error('Failed to submit images:', result.error);
+                console.log('Failed to submit images:', result.error);
             }
         } catch (error) {
-            console.error('Error submitting images:', error);
+            console.log('Error submitting images:', error);
         } finally {
             setIsLoading(false);
         }

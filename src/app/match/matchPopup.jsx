@@ -6,9 +6,28 @@ import dynamic from 'next/dynamic';
 
 const Confetti = dynamic(() => import('react-confetti'), { ssr: false });
 
-export default function MatchCelebration({ petName, image }) {
+export default function MatchCelebration({ petName = "Your new friend", image = "/images/pet-placeholder.png" }) {
   const [visible, setVisible] = useState(true);
   const [fadingOut, setFadingOut] = useState(false);
+  const [dimensions, setDimensions] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0
+  });
+
+  // Handle window resize for confetti
+  useEffect(() => {
+    const handleResize = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -50,7 +69,12 @@ export default function MatchCelebration({ petName, image }) {
               zIndex: 1
             }}
           >
-            <Confetti />
+            <Confetti 
+              width={dimensions.width} 
+              height={dimensions.height} 
+              recycle={true} 
+              numberOfPieces={200}
+            />
           </motion.div>
         )}
       </AnimatePresence>
@@ -76,26 +100,28 @@ export default function MatchCelebration({ petName, image }) {
            You matched with <strong>{petName}</strong>!
         </h1>
 
-        {image && (
-          <img
-            src={image}
-            alt={petName}
-            style={{
-              borderRadius: '1rem',
-              width: '100%',
-              maxHeight: '220px',
-              objectFit: 'cover',
-              marginBottom: '1rem',
-              border: '3px solid #ffc8dd',
-            }}
-          />
-        )}
+        <img
+          src={image || "/images/pet-placeholder.png"}
+          alt={petName}
+          onError={(e) => {
+            e.target.onerror = null; 
+            e.target.src = "/images/pet-placeholder.png";
+          }}
+          style={{
+            borderRadius: '1rem',
+            width: '100%',
+            maxHeight: '220px',
+            objectFit: 'cover',
+            marginBottom: '1rem',
+            border: '3px solid #ffc8dd',
+          }}
+        />
 
         <h2 style={{ fontWeight: 'normal', color: '#333', marginBottom: '0.5rem' }}>
            Your perfect match is waiting!
         </h2>
         <p style={{ color: '#555', fontSize: '1rem' }}>
-          {petName} is at <strong>Oregon Shelter</strong> and can’t wait to meet you! 
+          {petName} is at <strong>Oregon Shelter</strong> and can't wait to meet you! 
         </p>
       </motion.div>
     </div>
