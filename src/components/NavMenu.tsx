@@ -22,7 +22,10 @@ const NavMenu = () => {
       sx={{ 
         backgroundColor: 'rgba(255, 240, 245, 0.95)', 
         boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-        backdropFilter: 'blur(6px)'
+        backdropFilter: 'blur(6px)',
+        borderTopRightRadius: '12px',
+        borderTopLeftRadius: '12px',
+
       }}
     >
       <Toolbar sx={{ justifyContent: 'space-between' }}>

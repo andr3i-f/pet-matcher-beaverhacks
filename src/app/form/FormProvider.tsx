@@ -195,7 +195,7 @@ export default function FormProvider() {
                 </Box>
             )}
 
-            <Box sx={{ width: '100%', maxWidth: '1000px', mb: 4, mt: 2 }}>
+            <Box sx={{ width: '100%', maxWidth: '1000px'}}>
                 <Stepper
                     activeStep={activeStep}
                     sx={{
@@ -445,13 +445,13 @@ export default function FormProvider() {
                                             justifyContent: 'center',
                                             alignItems: 'center',
                                             borderRadius: 2,
-                                            mb: 2,
+                                            //mb: 2,
                                             cursor: 'pointer',
                                             transition: 'opacity 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease',
                                             opacity: clicked ? 0 : fadeIn ? 1 : fadeOut ? 0 : 1,
                                             '&:hover': {
                                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                                                transform: 'scale(1.02)',
+                                                transform: 'scale(1.1)',
                                             }
                                         }}
                                         elevation={2}

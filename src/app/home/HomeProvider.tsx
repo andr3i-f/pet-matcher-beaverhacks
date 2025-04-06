@@ -178,7 +178,8 @@ export default function HomeProvider() {
                   borderRadius: '1rem',
                   bgcolor: 'rgba(255, 255, 255, 0.9)',
                   '&:hover': {
-                    transform: 'translateY(-5px)',
+                    transform: 'translateY(-5px) scale(1.1)',
+                    
                     transition: 'transform 0.3s ease'
                   }
                 }}
