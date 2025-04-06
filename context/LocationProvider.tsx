@@ -3,8 +3,18 @@
 import { createContext, useState, ReactNode, useContext, useEffect } from 'react';
 
 interface LocationType {
+<<<<<<< HEAD
     latitude: number;
     longitude: number;
+=======
+  latitude: number;
+  longitude: number;
+}
+
+interface LocationContextType {
+  location: LocationType | undefined;
+  setLocation: (location: LocationType) => void;
+>>>>>>> 77e55a154e9dd523539778f41159c7a04a36882f
 }
 
 export const LocationContext = createContext(undefined);
