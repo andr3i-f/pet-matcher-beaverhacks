@@ -2,14 +2,14 @@
 
 import { createContext, useState, ReactNode, useContext, useEffect } from 'react';
 
-interface LocationContextType {
-  location: string;
-  setLocation: (location: string) => void;
+interface LocationType {
+  latitude: number;
+  longitude: number;
 }
 
-interface LocationType {
-    latitude: number;
-    longitude: number;
+interface LocationContextType {
+  location: LocationType | undefined;
+  setLocation: (location: LocationType) => void;
 }
 
 const LocationContext = createContext<LocationContextType | undefined>(undefined);
