@@ -5,7 +5,7 @@ import { submitSelectedImages } from "../api/form";
 import { LocationContext } from "../../../context/LocationProvider";
 import { useRouter } from 'next/navigation';
 import { MatchContext } from "../../../context/MatchContext";
-const steps = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6", "Step 7", "Step 8"];
+const steps = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6", "Step 7", "Step 8", "Step 9", "Step 10"];
 
 const listImages = [
     "https://images.pexels.com/photos/126407/pexels-photo-126407.jpeg",
@@ -42,7 +42,7 @@ const listImages = [
     "https://www.safehavenforcats.org/images/pet_images/15861-0.jpg",
     "https://www.safehavenforcats.org/wp-content/uploads/2024/07/Kitty-in-a-Shelter.jpg",
     "https://preview.redd.it/making-a-feral-shelter-for-the-winter-and-need-guidance-v0-9bixu6c1z43c1.png?width=714&format=png&auto=webp&s=74aa95183424e2aea8fff298a6fe2ae5d8a79d60",
-    "https://people.com/thmb/D0LEdpOkIdQjgErDXy2bkuLStRA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(734x276:736x278)/Barney-cat-smiling-083123-tout-f538711c47c742bb97536b09655c7e12.jpg",
+    "https://www.boredpanda.com/blog/wp-content/uploads/2023/03/64085c5101ac3_3mf58dr6aqz91__700.jpg",
     "https://images.squarespace-cdn.com/content/v1/5a70dd5580bd5e479fef8b8f/1633706802573-TRFEP1BM1X8BVO4DUTFX/21-cat-welfare-ohio-h3-copy5.png",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQQGwX5sfJGCMeEOKFRar7-DNkAto8-jYkXw&s",
     "https://s3-media0.fl.yelpcdn.com/bphoto/Zg_nrIuCoiO3-TX7f1nCXg/348s.jpg",
@@ -291,24 +291,29 @@ export default function FormProvider() {
                                 zIndex: 1
                             }}
                         />
-                        <Button variant="contained"
-                            onClick={handleContinue}
-                            sx={{
-                                background: "linear-gradient(to right, #a592d6, #65548f)",
-                                color: "white",
-                                fontWeight: "bold",
-                                fontSize: "1.2rem",
-                                textTransform: "none",
-                                borderRadius: "24px",
-                                top: 50,
-                                paddingX: 3,
-                                paddingY: 1,
-                                '&:hover': {
-                                    background: "linear-gradient(to right, #baa7eb, #7f6dab)",
-                                    color: "#40207a"
-                                }
-                            }}
-                        >Continue</Button>
+                        <Button
+  variant="contained"
+  onClick={handleContinue}
+  sx={{
+    background: "linear-gradient(to right, #a592d6, #65548f)",
+    color: "white",
+    fontWeight: "bold",
+    fontSize: "1.2rem",
+    textTransform: "none",
+    borderRadius: "24px",
+    paddingX: 3,
+    paddingY: 1,
+    position: 'relative', // or 'absolute' if you want to control placement
+    zIndex: 3, // 👈 higher than the speech bubble!
+    top: 50, // adjust or remove if needed
+    '&:hover': {
+      background: "linear-gradient(to right, #baa7eb, #7f6dab)",
+      color: "#40207a"
+    }
+  }}
+>
+  Continue
+</Button>
                     </Box>
                 </Box>
             ) : (
@@ -433,8 +438,8 @@ export default function FormProvider() {
                                     <Paper
                                         onClick={() => handleClick(imageUrl)}
                                         sx={{
-                                            width: 350,
-                                            height: 350,
+                                            width: "24vw",
+                                            height: "29vh",
                                             backgroundColor: 'white',
                                             backgroundImage: loadedImages[imageUrl] && !errorImages[imageUrl] ? `url(${imageUrl})` : 'none',
                                             backgroundSize: "cover",
