@@ -160,7 +160,7 @@ export default function MatchCelebration() {
 
           {matchedPet?.description && (
             <p style={{ color: '#555', fontSize: '0.9rem', marginTop: '1rem', fontStyle: 'italic' }}>
-              "{matchedPet.description.substring(0, 120)}..."
+              "{matchedPet.AIDescription}"
             </p>
           )}
         </motion.div>
