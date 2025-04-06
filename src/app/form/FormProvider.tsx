@@ -291,24 +291,29 @@ export default function FormProvider() {
                                 zIndex: 1
                             }}
                         />
-                        <Button variant="contained"
-                            onClick={handleContinue}
-                            sx={{
-                                background: "linear-gradient(to right, #a592d6, #65548f)",
-                                color: "white",
-                                fontWeight: "bold",
-                                fontSize: "1.2rem",
-                                textTransform: "none",
-                                borderRadius: "24px",
-                                top: 50,
-                                paddingX: 3,
-                                paddingY: 1,
-                                '&:hover': {
-                                    background: "linear-gradient(to right, #baa7eb, #7f6dab)",
-                                    color: "#40207a"
-                                }
-                            }}
-                        >Continue</Button>
+                        <Button
+  variant="contained"
+  onClick={handleContinue}
+  sx={{
+    background: "linear-gradient(to right, #a592d6, #65548f)",
+    color: "white",
+    fontWeight: "bold",
+    fontSize: "1.2rem",
+    textTransform: "none",
+    borderRadius: "24px",
+    paddingX: 3,
+    paddingY: 1,
+    position: 'relative', // or 'absolute' if you want to control placement
+    zIndex: 3, // 👈 higher than the speech bubble!
+    top: 50, // adjust or remove if needed
+    '&:hover': {
+      background: "linear-gradient(to right, #baa7eb, #7f6dab)",
+      color: "#40207a"
+    }
+  }}
+>
+  Continue
+</Button>
                     </Box>
                 </Box>
             ) : (
