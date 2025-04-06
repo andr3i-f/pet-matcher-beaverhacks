@@ -198,88 +198,67 @@ export default function FormProvider() {
             </Box>
 
             {showIntro ? (
-                <Box
-                    sx={{
-                        width: '100%',
-                        height: '70vh',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        position: 'relative'
-                    }}
-                >
-                    <Box sx={{ 
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        position: 'relative'
-                    }}>
-                    <Box
+                    <Stack
                         sx={{
-                            position: 'relative',
                             width: '100%',
-                            maxWidth: '800px',
+                            height: '70vh',
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            textAlign: 'center',
-                            mb: 4
+                            justifyContent: 'center',
+                            position: 'relative'
                         }}
                     >
-
-                    </Box>
-                    
-                    <Box
-                        sx={{
-                            position: 'absolute',
-                            bottom: 90,
-                            right: 10,
-                            width: 420,
-                            height: 290,
-                            backgroundImage: `url("/images/pixel-speech-bubble.png")`,
-                            backgroundSize: "contain",
-                            backgroundRepeat: "no-repeat",
-                            backgroundPosition: "center",
-                            zIndex: 2
-                        }}
-                    >
-                    </Box>
-                    <Box
-                        sx={{
-                            position: 'absolute',
-                            bottom: -23,
-                            lef: 0,
-                            width: 400,
-                            height: 270,
-                            backgroundImage: `url("/images/dogImage.png")`,
-                            backgroundSize: "contain",
-                            backgroundRepeat: "no-repeat",
-                            backgroundPosition: "center",
-                            zIndex: 1
-                        }}
-                    />
-                        <Button variant="contained"
-                            onClick={handleContinue}
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            position: 'relative'
+                        }}>
+                        <Box
                             sx={{
-                                background: "linear-gradient(to right, #a592d6, #65548f)",
-                                color: "white",
-                                fontWeight: "bold",
-                                fontSize: "1.2rem",
-                                textTransform: "none",
-                                borderRadius: "24px",
-                                top: 50,
-                                paddingX: 3,
-                                paddingY: 1,
-                                '&:hover': {
-                                    background: "linear-gradient(to right, #baa7eb, #7f6dab)",
-                                    color: "#40207a"
-                                }
+                                position: 'relative',
+                                width: '100%',
+                                maxWidth: '800px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                textAlign: 'center',
+                                mb: 4
                             }}
-                        >Continue</Button>
-                    </Box>
-                </Box>
+                        >
+                        </Box>
+                        <Box
+                            sx={{
+                                width: 475,
+                                height: 325,
+                                backgroundImage: `url("/images/yappingDogImage.png")`,
+                                backgroundSize: "contain",
+                                backgroundRepeat: "no-repeat",
+                                backgroundPosition: "center",
+                            }}
+                        />
+                            <Button variant="contained"
+                                onClick={handleContinue}
+                                sx={{
+                                    background: "linear-gradient(to right, #a592d6, #65548f)",
+                                    color: "white",
+                                    fontWeight: "bold",
+                                    fontSize: "1.2rem",
+                                    textTransform: "none",
+                                    borderRadius: "24px",
+                                    top: 50,
+                                    paddingX: 3,
+                                    paddingY: 1,
+                                    '&:hover': {
+                                        background: "linear-gradient(to right, #baa7eb, #7f6dab)",
+                                        color: "#40207a"
+                                    }
+                                }}
+                            >Continue</Button>
+                        </Box>
+                    </Stack>
             ) : (
                 <Box
                     sx={{
@@ -353,8 +332,8 @@ export default function FormProvider() {
                                     <Paper
                                         onClick={() => handleClick(imageUrl)}
                                         sx={{
-                                            width: 350,
-                                            height: 350,
+                                            width: "25vw",
+                                            height: "29vh",
                                             backgroundColor: 'white',
                                             backgroundImage: loadedImages[imageUrl] && !errorImages[imageUrl] ? `url(${imageUrl})` : 'none',
                                             backgroundSize: "cover",
@@ -397,40 +376,6 @@ export default function FormProvider() {
                         </Grid>
                     )}
                 </Box>
-            )}
-
-            {!showIntro && activeStep !== steps.length && (
-                <>
-                    <Box
-                        sx={{
-                            position: 'absolute',
-                            bottom: 100,  // Increased from 120 to move up
-                            right: 100,   // Increased from 80 to move left
-                            width: 320,
-                            height: 190,
-                            backgroundImage: `url("/images/pixel-speech-bubble.png")`,
-                            backgroundSize: "contain",
-                            backgroundRepeat: "no-repeat",
-                            backgroundPosition: "center",
-                            zIndex: 2
-                        }}
-                    >
-                    </Box>
-                    <Box
-                        sx={{
-                            position: 'absolute',
-                            bottom: 0,
-                            right: 0,
-                            width: 300,
-                            height: 170,
-                            backgroundImage: `url("/images/dogImage.png")`,
-                            backgroundSize: "contain",
-                            backgroundRepeat: "no-repeat",
-                            backgroundPosition: "center",
-                            zIndex: 1
-                        }}
-                    />
-                </>
             )}
         </Box>
     );
