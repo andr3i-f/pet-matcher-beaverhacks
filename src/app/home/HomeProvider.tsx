@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Box, Typography, Button, Container, Grid, Paper, Stack } from '@mui/material';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 export default function HomeProvider() {
@@ -19,7 +18,7 @@ export default function HomeProvider() {
         backgroundRepeat: "no-repeat",
         padding: { xs: "1rem", md: "2rem" },
         overflow: "auto",
-        position: "relative" // Added position relative for absolute positioning of border
+        position: "relative" 
       }}
     >
       <Box
