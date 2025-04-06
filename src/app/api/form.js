@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function submitSelectedImages(selectedImages, location = null) {
   try {
-    const endpointUrl = 'http://localhost:5001/submitForm';
+    const endpointUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const params = {
       urls: JSON.stringify(selectedImages),  // Convert array to string
