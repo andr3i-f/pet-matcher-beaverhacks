@@ -6,6 +6,7 @@ import { createContext, ReactNode, useState } from "react";
 export interface MatchedPet {
   id?: number;
   organization_id?: string;
+  AIDescription?: string;
   url?: string;
   type?: string;
   species?: string;
