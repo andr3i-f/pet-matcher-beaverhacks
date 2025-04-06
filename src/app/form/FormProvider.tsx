@@ -42,7 +42,7 @@ const listImages = [
     "https://www.safehavenforcats.org/images/pet_images/15861-0.jpg",
     "https://www.safehavenforcats.org/wp-content/uploads/2024/07/Kitty-in-a-Shelter.jpg",
     "https://preview.redd.it/making-a-feral-shelter-for-the-winter-and-need-guidance-v0-9bixu6c1z43c1.png?width=714&format=png&auto=webp&s=74aa95183424e2aea8fff298a6fe2ae5d8a79d60",
-    "https://people.com/thmb/D0LEdpOkIdQjgErDXy2bkuLStRA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(734x276:736x278)/Barney-cat-smiling-083123-tout-f538711c47c742bb97536b09655c7e12.jpg",
+    "https://www.boredpanda.com/blog/wp-content/uploads/2023/03/64085c5101ac3_3mf58dr6aqz91__700.jpg",
     "https://images.squarespace-cdn.com/content/v1/5a70dd5580bd5e479fef8b8f/1633706802573-TRFEP1BM1X8BVO4DUTFX/21-cat-welfare-ohio-h3-copy5.png",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQQGwX5sfJGCMeEOKFRar7-DNkAto8-jYkXw&s",
     "https://s3-media0.fl.yelpcdn.com/bphoto/Zg_nrIuCoiO3-TX7f1nCXg/348s.jpg",
