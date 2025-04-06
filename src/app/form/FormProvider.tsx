@@ -27,23 +27,48 @@ const listImages = [
     "https://images.pexels.com/photos/350428/pexels-photo-350428.jpeg",
     "https://images.pexels.com/photos/33053/dog-young-dog-small-dog-maltese.jpg",
     "https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg",
-    "https://images.pexels.com/photos/2023384/pexels-photo-2023384.jpeg",
-    "https://images.pexels.com/photos/1490908/pexels-photo-1490908.jpeg",
-    "https://images.pexels.com/photos/1254140/pexels-photo-1254140.jpeg",
-    "https://images.pexels.com/photos/164446/pexels-photo-164446.jpeg",
-    "https://images.pexels.com/photos/235805/pexels-photo-235805.jpeg",
-    "https://images.pexels.com/photos/1643457/pexels-photo-1643457.jpeg",
-    "https://images.pexels.com/photos/58997/pexels-photo-58997.jpeg",
-    "https://images.pexels.com/photos/825947/pexels-photo-825947.jpeg",
-    "https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg",
-    "https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg",
-    "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg",
-    "https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg",
-    "https://images.pexels.com/photos/551628/pexels-photo-551628.jpeg",
-    "https://images.pexels.com/photos/374906/pexels-photo-374906.jpeg",
-    "https://images.pexels.com/photos/350428/pexels-photo-350428.jpeg",
-    "https://images.pexels.com/photos/33053/dog-young-dog-small-dog-maltese.jpg",
-    "https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg"
+    "https://vetsonparker.com.au/wp-content/uploads/2015/04/Rabbit-Facts.jpg",
+    "https://hips.hearstapps.com/hmg-prod/images/baby-rabbit-in-meadow-royalty-free-image-1717078659.jpg?crop=0.88763xw:1xh;center,top&resize=1200:*",
+    "https://hips.hearstapps.com/hmg-prod/images/rabbit-breeds-american-white-1553635287.jpg?crop=0.976xw:0.651xh;0.0242xw,0.291xh&resize=980:*",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8WOy3YTgmDw82nqVguwLV9HbN7oe32E8dRyUji-HsEWDUfitfbky5SHtwnjR7z8EaKxM&usqp=CAU",
+    "https://www.omlet.us/images/originals/rabbit_breeds_angora.jpg",
+    "https://img.hobbyfarms.com/tan-rabbits-scaled.jpeg",
+    "https://www.bluecross.org.uk/sites/default/files/d8/styles/theme_feature_extra_large/public/assets/images/Rabbit%20-%20Landscape.jpg.webp?itok=9VTeKfQg",
+    "https://cdn.pixabay.com/photo/2021/11/07/17/55/hamster-6777533_640.jpg",
+    "https://media.istockphoto.com/id/675804830/photo/beige-hamster.jpg?s=612x612&w=0&k=20&c=e4P9Z3U3PVwtNEMZUCkoDkBrHr9E0XDxk9fZdDKZHZ4=",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH1quRrPGeu4wyqbjEEr8VgqteyGw4MVCqiw&s",
+    "https://t4.ftcdn.net/jpg/05/14/30/79/360_F_514307915_qsytMylApHJYvOn8f40Gk9ebuApHE8Pr.jpg",
+    "https://cdn.mos.cms.futurecdn.net/BbHAUpLzTgPJm7zNAKd69T-1200-80.png",
+    "https://www.safehavenforcats.org/images/pet_images/15861-0.jpg",
+    "https://www.safehavenforcats.org/wp-content/uploads/2024/07/Kitty-in-a-Shelter.jpg",
+    "https://preview.redd.it/making-a-feral-shelter-for-the-winter-and-need-guidance-v0-9bixu6c1z43c1.png?width=714&format=png&auto=webp&s=74aa95183424e2aea8fff298a6fe2ae5d8a79d60",
+    "https://people.com/thmb/D0LEdpOkIdQjgErDXy2bkuLStRA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(734x276:736x278)/Barney-cat-smiling-083123-tout-f538711c47c742bb97536b09655c7e12.jpg",
+    "https://images.squarespace-cdn.com/content/v1/5a70dd5580bd5e479fef8b8f/1633706802573-TRFEP1BM1X8BVO4DUTFX/21-cat-welfare-ohio-h3-copy5.png",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQQGwX5sfJGCMeEOKFRar7-DNkAto8-jYkXw&s",
+    "https://s3-media0.fl.yelpcdn.com/bphoto/Zg_nrIuCoiO3-TX7f1nCXg/348s.jpg",
+    "https://static.wixstatic.com/media/f4a573_428ef741e3844c81bf49be2a3bc3c68c~mv2.png/v1/fill/w_640,h_270,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/f4a573_428ef741e3844c81bf49be2a3bc3c68c~mv2.png",
+    "https://assets3.thrillist.com/v1/image/2717842/792x792/scale;webp=auto;jpeg_quality=60.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIZ2-mmpirQ5FfvjM51XsvDBWK4ADdx6p_bQ&s"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   ]
   ;
 
@@ -91,6 +116,7 @@ export default function FormProvider() {
 
     useEffect(() => {
         const shuffled = [...listImages].sort(() => 0.5 - Math.random());
+        console.log(shuffled)
         setRandomizedImages(shuffled);
     }, []);
 
@@ -123,12 +149,10 @@ export default function FormProvider() {
         if (randomizedImages.length === 0) return [];
 
         const startIndex = (activeStep * 4) % randomizedImages.length;
+        const endIndex = startIndex + 4;
 
-        return Array(4).fill(null).map((_, index) => {
-            const imgIndex = (startIndex + index) % randomizedImages.length;
+        return randomizedImages.slice(startIndex, endIndex);
 
-            return randomizedImages[imgIndex];
-        });
     };
 
     const handleSubmitImages = async () => {
