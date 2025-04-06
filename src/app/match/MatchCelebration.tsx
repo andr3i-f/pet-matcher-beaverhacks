@@ -4,8 +4,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { MatchContext } from '../../../context/MatchContext';
-import { Box } from '@mui/material';
+import { Box, IconButton, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
 
 const Confetti = dynamic(() => import('react-confetti'), { ssr: false });
 
@@ -17,9 +18,10 @@ export default function MatchCelebration() {
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
     height: typeof window !== 'undefined' ? window.innerHeight : 0
   });
+  const [index, setIndex] = useState(0);
 
   // Get the first match if available
-  const matchedPet = matches && matches.length > 0 ? matches[0] : null;
+  const matchedPet = matches && matches.length > 0 ? matches[index] : null;
 
   // Extract pet details
   const petName = matchedPet?.name || "Your new friend";
@@ -163,6 +165,15 @@ export default function MatchCelebration() {
               "{matchedPet.AIDescription}"
             </p>
           )}
+                  <Stack direction={"row"} alignContent={"center"} justifyContent={"center"} sx={{width: "100%"}}>
+                  {index > 0 && <IconButton onClick={() => setIndex(previous => previous - 1)}>
+                      <ArrowBack/>
+                    </IconButton>}
+                  <Typography alignSelf={"center"} color="black">{index + 1} / {matches?.length}</Typography>
+                    {index < matches?.length - 1 && <IconButton onClick={() => setIndex(previous => previous + 1)}>
+                      <ArrowForward/>
+                    </IconButton>}
+                  </Stack>
         </motion.div>
       </div>
     </Box>
