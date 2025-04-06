@@ -57,13 +57,13 @@ export default function FormProvider() {
     const handleClick = (imageUrl: string) => {
         if (clicked) return;
         setClicked(true);
-        setFadeOut(true); 
+        setFadeOut(true);
 
         setTimeout(() => {
             setSelectedImages(prev => [...prev, imageUrl]);
             handleNext();
 
-        }, 500); 
+        }, 500);
     };
 
     useEffect(() => {
@@ -73,11 +73,11 @@ export default function FormProvider() {
 
     const handleNext = () => {
         setIsLoading(false);
-        setFadeOut(false); 
-        setClicked(false); 
+        setFadeOut(false);
+        setClicked(false);
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        setFadeIn(false); 
-        
+        setFadeIn(false);
+
         setTimeout(() => {
             setFadeIn(true);
         }, 750);
@@ -300,6 +300,34 @@ export default function FormProvider() {
                     </Grid>
                 )}
             </Box>
+            <Box
+                sx={{
+                    position: 'absolute',
+                    bottom: 120,
+                    right: 80,
+                    width: 350,
+                    height: 220,
+                    backgroundImage: `url("/images/pixel-speech-bubble.png")`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    zIndex: 1
+                }}
+            />
+            <Box
+                sx={{
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    width: 350,
+                    height: 220,
+                    backgroundImage: `url("/images/dogImage.png")`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    zIndex: 1
+                }}
+            />
         </Box>
     );
 }
