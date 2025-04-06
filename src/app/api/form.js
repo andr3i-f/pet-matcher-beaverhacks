@@ -1,40 +1,34 @@
-
 import axios from "axios";
 
-
 export async function submitSelectedImages(selectedImages, location = null) {
-    try {
-        const endpointUrl = 'http://localhost:5000/submitForm';
-        
-        const params = {
-            urls: JSON.stringify(selectedImages),  // Convert array to a string for URL compatibility
-            location: JSON.stringify(location)  // Convert object to string
-          };
-          
-          console.log("Params: ", params);
-          
-          const response = await axios.get(endpointUrl, {
-            params: params,  // Pass query parameters as an object
-            headers: {
-              "Content-Type": "application/json"
-            }
-          });
+  try {
+    const endpointUrl = 'http://localhost:5000/submitForm';
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+    const params = {
+      urls: JSON.stringify(selectedImages),  // Convert array to string
+      location: JSON.stringify(location)     // Convert object to string
+    };
 
-        const data = await response.json();
-        return {
-            success: true,
-            data: data
-        };
+    console.log("Params: ", params);
 
-    } catch (error) {
-        console.error('Error submitting selected images:', error);
-        return {
-            success: false,
-            error: error.message
-        };
-    }
+    const response = await axios.get(endpointUrl, {
+      params,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    return {
+      success: true,
+      data: response.data
+    };
+
+  } catch (error) {
+    console.error('Error submitting selected images:', error);
+
+    return {
+      success: false,
+      error: error.response?.data?.error || error.message
+    };
+  }
 }
