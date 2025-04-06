@@ -80,7 +80,6 @@ const listImages = [
   "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/75928941/1/?bust=1743922588&width=450",
   "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/75925578/1/?bust=1743892093&width=450",
   "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/75922935/1/?bust=1743870798&width=450",
-  "https://www.petfinder.com/rabbit/jerry-75922677/oh/novelty/rescue-village-oh72/",
   "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/75922163/1/?bust=1743867943&width=450",
   "https://dbw3zep4prcju.cloudfront.net/animal/0043cd16-5638-4ab9-832f-c726e2cfc581/image/ca6921a2-4fa5-11e7-8fa0-128319cd1c5a.jpg?versionId=T50N64U6xPuhuXoHsb71E.4WkH0OklIL&bust=1712597287&width=450",
   "https://dbw3zep4prcju.cloudfront.net/animal/808f9dd3-e4af-4ead-8e76-10cda2f30388/image/4434db1f-4fa3-11e7-8fa0-128319cd1c5a.jpg?versionId=GWjJvJh_sKVWCXYFJqgIk41VJK6ifbJp&bust=1713281096&width=450",
