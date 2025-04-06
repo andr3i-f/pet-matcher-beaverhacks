@@ -1,0 +1,62 @@
+/* src/app/MatchingScreen/MatchingScreen.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #ffebcd, #ffdab9, #e6e6fa);
+    color: #6a0dad;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .message {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .icons {
+    font-size: 3rem;
+  }
+  
+  .note {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #a370cc;
+    font-style: italic;
+  }
+  .tennisBallSpinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    height: 80px;
+  }
+  
+  .ball {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 30% 30%, #fff 5%, #b4e907 6%, #b4e907 94%, #fff 95%);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    animation: spin 0.8s linear infinite;
+  }
+  
+
+  
+  .ball::after {
+    transform: rotate(-45deg);
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  
