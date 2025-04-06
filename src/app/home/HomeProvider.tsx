@@ -17,15 +17,16 @@ export default function HomeProvider() {
           }}
         >
           <Box
-            component="img"
-            src="/images/dogImage.png"
-            alt="Static Image"
             sx={{
               position: "absolute", 
               bottom: 16,          
               left: 16,            
-              width: 220,          
-              height: 220,         
+              width: 350,          
+              height: 220, 
+              backgroundImage: `url("/images/poweredByGemini.png")`,  
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center"     
             }}
           />
           <Stack
