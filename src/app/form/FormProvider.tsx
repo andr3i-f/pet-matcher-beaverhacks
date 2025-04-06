@@ -1,12 +1,9 @@
-"use client"
-
 import React, { useState, useEffect } from "react";
 import { Box, Stepper, Step, StepLabel, Button, Typography, Grid, Paper, Stack } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
 
-const steps = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6", "Step 7", "Step 8", "Step 9", "Step 10",];
+const steps = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6", "Step 7", "Step 8", "Step 9", "Step 10"];
 
-// Replace the listImages array with more reliable image URLs
 const listImages = [
     "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg",
     "https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg",
@@ -42,6 +39,32 @@ export default function FormProvider() {
     const [activeStep, setActiveStep] = useState(0);
     const [randomizedImages, setRandomizedImages] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [selectedImages, setSelectedImages] = useState<string[]>([]);
+    const [clicked, setClicked] = useState(false);
+    const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
+    const [errorImages, setErrorImages] = useState<Record<string, boolean>>({});
+    const [fadeIn, setFadeIn] = useState(false);
+    const [fadeOut, setFadeOut] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setFadeIn(true);
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    const handleClick = (imageUrl: string) => {
+        if (clicked) return;
+        setClicked(true);
+        setFadeOut(true); 
+
+        setTimeout(() => {
+            setSelectedImages(prev => [...prev, imageUrl]);
+            handleNext();
+
+        }, 500); 
+    };
 
     useEffect(() => {
         const shuffled = [...listImages].sort(() => 0.5 - Math.random());
@@ -49,92 +72,28 @@ export default function FormProvider() {
     }, []);
 
     const handleNext = () => {
-        setIsLoading(false);  
+        setIsLoading(false);
+        setFadeOut(false); 
+        setClicked(false); 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        setFadeIn(false); 
+        
+        setTimeout(() => {
+            setFadeIn(true);
+        }, 750);
     };
 
     const handleReset = () => {
         setActiveStep(0);
+        setSelectedImages([]);
     };
 
-    const ImagePlaceholder = ({ imageUrl }: { imageUrl: string }) => {
-        const [clicked, setClicked] = useState(false);
-        const [imageLoaded, setImageLoaded] = useState(false);
-        const [imageError, setImageError] = useState(false);
-        const [fadeIn, setFadeIn] = useState(false);
+    const handleImageLoad = (imageUrl: string) => {
+        setLoadedImages(prev => ({ ...prev, [imageUrl]: true }));
+    };
 
-        useEffect(() => {
-            const timer = setTimeout(() => {
-                setFadeIn(true);
-            }, 100); 
-
-            return () => clearTimeout(timer);
-        }, []);
-
-        const handleClick = () => {
-            if (clicked) return;
-            setClicked(true);
-
-            setTimeout(() => {
-                handleNext();
-            }, 500);
-        };
-
-        return (
-            <Paper
-                onClick={handleClick}
-                sx={{
-                    width: 350,
-                    height: 350,
-                    backgroundColor: 'white',
-                    backgroundImage: imageLoaded && !imageError ? `url(${imageUrl})` : 'none',
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    border: '1px solid #e0e0e0',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderRadius: 2,
-                    mb: 2,
-                    cursor: 'pointer',
-                    transition: 'opacity 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease',
-                    opacity: clicked ? 0 : fadeIn ? 1 : 0, 
-                    '&:hover': {
-                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                        transform: 'scale(1.02)',
-                    }
-                }}
-                elevation={2}
-            >
-                <img
-                    src={imageUrl}
-                    alt="Pet"
-                    onLoad={() => setImageLoaded(true)}
-                    onError={() => setImageError(true)}
-                    style={{ display: 'none' }}
-                />
-
-                {!imageLoaded && !imageError && (
-                    <CircularProgress color="secondary" />
-                )}
-
-                {imageError && (
-                    <Box sx={{ textAlign: 'center' }}>
-                        <Typography variant="body2" color="error">
-                            Image could not be loaded
-                        </Typography>
-                        <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
-                            Click to continue anyway
-                        </Typography>
-                    </Box>
-                )}
-            </Paper>
-        );
+    const handleImageError = (imageUrl: string) => {
+        setErrorImages(prev => ({ ...prev, [imageUrl]: true }));
     };
 
     const getCurrentImages = () => {
@@ -144,6 +103,7 @@ export default function FormProvider() {
 
         return Array(4).fill(null).map((_, index) => {
             const imgIndex = (startIndex + index) % randomizedImages.length;
+
             return randomizedImages[imgIndex];
         });
     };
@@ -162,7 +122,7 @@ export default function FormProvider() {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 padding: "2rem",
-                position: "relative"  
+                position: "relative"
             }}
         >
             {isLoading && (
@@ -177,7 +137,7 @@ export default function FormProvider() {
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        zIndex: 10000,  // Very high z-index
+                        zIndex: 10000,
                     }}
                 >
                     <CircularProgress
@@ -191,18 +151,28 @@ export default function FormProvider() {
                 </Box>
             )}
 
-            <Box sx={{ width: '100%', maxWidth: '1000px', mb: 4, mt: 4 }}>
+            <Box sx={{ width: '100%', maxWidth: '1000px', mb: 4, mt: 2 }}>
                 <Stepper
                     activeStep={activeStep}
                     sx={{
+                        padding: '15px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        borderRadius: '8px',
+                        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)',
                         '& .MuiStepIcon-root': {
                             color: '#FFFFFF',
+                            filter: 'drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.3))',
                             '&.Mui-active': {
                                 color: '#FFEFFD',
+                                filter: 'drop-shadow(0px 3px 5px rgba(102, 15, 129, 0.5))',
                             },
                             '&.Mui-completed': {
                                 color: '#660F81',
+                                filter: 'drop-shadow(0px 2px 4px rgba(255, 255, 255, 0.3))',
                             },
+                        },
+                        '& .MuiStepConnector-line': {
+                            boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
                         },
                     }}
                 >
@@ -217,19 +187,53 @@ export default function FormProvider() {
             <Box
                 sx={{
                     width: '100%',
-                    maxWidth: '800px', // Reduced max width to make the 2x2 grid more compact
+                    maxWidth: '800px',
                     display: 'flex',
                     justifyContent: 'center',
                     mt: 8,
                 }}
             >
                 {activeStep === steps.length ? (
-                    <Box sx={{ mt: 2, textAlign: 'center' }}>
-                        <Typography sx={{ mt: 2, mb: 1 }}>
-                            Done !
+                    <Box sx={{ mt: 2, textAlign: 'center', width: '100%' }}>
+                        <Typography variant="h5" sx={{ mt: 2, mb: 3, color: "#660F81" }}>
+                            Your Selected Pets
                         </Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'center', pt: 2 }}>
-                            <Button onClick={handleReset}>Reset</Button>
+                        <Grid container spacing={2} justifyContent="center">
+                            {selectedImages.map((url, index) => (
+                                <Grid item xs={6} sm={4} md={3} key={index}>
+                                    <Paper
+                                        sx={{
+                                            width: 140,
+                                            height: 140,
+                                            backgroundImage: `url(${url})`,
+                                            backgroundSize: "cover",
+                                            backgroundPosition: "center",
+                                            borderRadius: 2,
+                                            boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                                            border: '2px solid #FFEFFD',
+                                            transition: 'transform 0.2s ease',
+                                            '&:hover': {
+                                                transform: 'scale(1.05)'
+                                            }
+                                        }}
+                                    />
+                                </Grid>
+                            ))}
+                        </Grid>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', pt: 4 }}>
+                            <Button
+                                variant="contained"
+                                onClick={handleReset}
+                                sx={{
+                                    bgcolor: '#660F81',
+                                    '&:hover': {
+                                        bgcolor: '#4a0b5c'
+                                    },
+                                    boxShadow: '0 2px 5px rgba(0,0,0,0.3)'
+                                }}
+                            >
+                                Start Again
+                            </Button>
                         </Box>
                     </Box>
                 ) : (
@@ -245,17 +249,57 @@ export default function FormProvider() {
                         {getCurrentImages().map((imageUrl, index) => (
                             <Grid
                                 item
-                                xs={6}  // Each item takes half the width (2 columns per row)
+                                xs={6}
                                 key={index}
                                 sx={{ display: 'flex', justifyContent: 'center' }}
                             >
-                                <ImagePlaceholder imageUrl={imageUrl} />
+                                <Paper
+                                    onClick={() => handleClick(imageUrl)}
+                                    sx={{
+                                        width: 350,
+                                        height: 350,
+                                        backgroundColor: 'white',
+                                        backgroundImage: loadedImages[imageUrl] && !errorImages[imageUrl] ? `url(${imageUrl})` : 'none',
+                                        backgroundSize: "cover",
+                                        backgroundPosition: "center",
+                                        backgroundRepeat: "no-repeat",
+                                        border: '1px solid #e0e0e0',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        borderRadius: 2,
+                                        mb: 2,
+                                        cursor: 'pointer',
+                                        transition: 'opacity 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease',
+                                        opacity: clicked ? 0 : fadeIn ? 1 : fadeOut ? 0 : 1,
+                                        '&:hover': {
+                                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                                            transform: 'scale(1.02)',
+                                        }
+                                    }}
+                                    elevation={2}
+                                >
+                                    <img
+                                        src={imageUrl}
+                                        alt="Pet"
+                                        onLoad={() => handleImageLoad(imageUrl)}
+                                        onError={() => handleImageError(imageUrl)}
+                                        style={{ display: 'none' }}
+                                    />
+
+                                    {!loadedImages[imageUrl] && !errorImages[imageUrl] && (
+                                        <CircularProgress color="secondary" />
+                                    )}
+
+                                    {errorImages[imageUrl] && (
+                                        <Typography variant="body2" color="textSecondary">Error loading image</Typography>
+                                    )}
+                                </Paper>
                             </Grid>
                         ))}
                     </Grid>
                 )}
             </Box>
-
         </Box>
     );
 }
