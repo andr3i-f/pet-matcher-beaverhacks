@@ -1,6 +1,5 @@
-import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import Link from "next/link";
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 export default function HomeProvider() {
     return (
