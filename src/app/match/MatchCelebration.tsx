@@ -159,21 +159,16 @@ export default function MatchCelebration() {
             </Link>
           </p>
 
-
+          {matchedPet?.distance && (
+            <p style={{ color: '#555', fontSize: '0.9rem', marginTop: '1rem', fontStyle: 'italic' }}>
+            {Math.floor(matchedPet.distance)} miles away!
+          </p>
+          )}
           {matchedPet?.description && (
             <p style={{ color: '#555', fontSize: '0.9rem', marginTop: '1rem', fontStyle: 'italic' }}>
               "{matchedPet.AIDescription}"
             </p>
           )}
-                  <Stack direction={"row"} alignContent={"center"} justifyContent={"center"} sx={{width: "100%"}}>
-                  {index > 0 && <IconButton onClick={() => setIndex(previous => previous - 1)}>
-                      <ArrowBack/>
-                    </IconButton>}
-                  <Typography alignSelf={"center"} color="black">{index + 1} / {matches?.length}</Typography>
-                    {index < matches?.length - 1 && <IconButton onClick={() => setIndex(previous => previous + 1)}>
-                      <ArrowForward/>
-                    </IconButton>}
-                  </Stack>
         </motion.div>
       </div>
     </Box>

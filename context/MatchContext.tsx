@@ -7,6 +7,7 @@ export interface MatchedPet {
   id?: number;
   organization_id?: string;
   AIDescription?: string;
+  distance?: number;
   url?: string;
   type?: string;
   species?: string;

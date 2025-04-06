@@ -433,8 +433,8 @@ export default function FormProvider() {
                                     <Paper
                                         onClick={() => handleClick(imageUrl)}
                                         sx={{
-                                            width: 350,
-                                            height: 350,
+                                            width: "24vw",
+                                            height: "29vh",
                                             backgroundColor: 'white',
                                             backgroundImage: loadedImages[imageUrl] && !errorImages[imageUrl] ? `url(${imageUrl})` : 'none',
                                             backgroundSize: "cover",
