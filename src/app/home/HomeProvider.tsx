@@ -1,14 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
-import { Box, Typography, Button, Container, Grid, Paper, Stack } from '@mui/material';
+import { Box, Typography, Button, Container, Grid, Paper, Stack, useMediaQuery, useTheme } from '@mui/material';
 import Image from 'next/image';
 
 export default function HomeProvider() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  
   return (
     <Box
       sx={{
         width: "100%",
-        height: "165vh",
+        minHeight: "100vh", // Changed from fixed height to minHeight
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -24,22 +28,21 @@ export default function HomeProvider() {
       <Box
         sx={{
           position: "absolute",
-          right: 16,
-          width: 250,
-          height: "180vh",
+          right: { xs: 0, md: 16 },
+          width: { xs: 100, sm: 150, md: 250 },
+          height: "100%", // Changed from fixed height to 100%
           top: 0,
           backgroundImage: `url("/images/borderimage.png")`,
           backgroundRepeat: "repeat",
           backgroundPosition: "center",
+          display: { xs: 'none', sm: 'block' } // Hide on mobile
         }}
       />
 
-
-
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-        <Grid container spacing={4}>
+        <Grid container spacing={{ xs: 2, md: 4 }} alignItems="center">
           <Grid item xs={12} md={6}>
-            <Box sx={{ pt: { xs: 2, md: 8 } }}>
+            <Box sx={{ pt: { xs: 2, md: 8 }, textAlign: { xs: 'center', md: 'left' } }}>
               <Typography
                 variant="h2"
                 sx={{
@@ -47,7 +50,7 @@ export default function HomeProvider() {
                   color: "#660F81",
                   mb: 2,
                   fontFamily: `'Segoe UI', 'Comic Sans MS', cursive`,
-                  fontSize: { xs: '2.5rem', md: '3.5rem' }
+                  fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' }
                 }}
               >
                 Pawfect Match
@@ -58,24 +61,23 @@ export default function HomeProvider() {
                   color: "#555",
                   mb: 4,
                   fontFamily: `'Segoe UI', sans-serif`,
+                  fontSize: { xs: '1rem', sm: '1.2rem', md: '1.5rem' }
                 }}
               >
                 Answer a few questions and let us connect you with your ideal furry companion.
               </Typography>
 
-
-              <Link href={"/form"}>
+              <Link href={"/form"} style={{ textDecoration: 'none' }}>
                 <Button variant="contained"
                   sx={{
-                    //mt: 10,
                     background: "linear-gradient(to right, #a592d6, #65548f)",
                     color: "white",
                     fontWeight: "bold",
-                    fontSize: "1.2rem",
+                    fontSize: { xs: "1rem", md: "1.2rem" },
                     textTransform: "none",
                     borderRadius: "24px",
-                    px: 4,
-                    py: 1.5,
+                    px: { xs: 3, md: 4 },
+                    py: { xs: 1, md: 1.5 },
                     '&:hover': {
                       background: "linear-gradient(to right, #baa7eb, #7f6dab)",
                       color: "#40207a"
@@ -86,38 +88,52 @@ export default function HomeProvider() {
             </Box>
           </Grid>
           <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Box sx={{ position: 'relative' }}>
+            <Box sx={{ position: 'relative', mt: { xs: 4, md: 0 }, mb: { xs: 4, md: 0 } }}>
               <Paper
                 elevation={6}
                 sx={{
                   borderRadius: '50%',
                   overflow: 'hidden',
-                  width: { xs: 280, sm: 350, md: 400 },
-                  height: { xs: 280, sm: 350, md: 400 },
+                  width: { xs: 200, sm: 280, md: 350, lg: 400 },
+                  height: { xs: 200, sm: 280, md: 350, lg: 400 },
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
                   border: '5px solid #ffc8dd',
                 }}
               >
-                <div style={{ position: 'relative', width: 500, height: 500, top: 100 }}>
-                  <Image
-                    src="/images/dogImage.png"
-                    alt="Cute Dog"
-                    layout="fill"
-                    objectFit="cover"
-                  />
+                <div style={{ 
+                  position: 'relative', 
+                  width: '100%', 
+                  height: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'flex-end'
+                }}>
+                  <div style={{ 
+                    position: 'relative', 
+                    width: isMobile ? 200 : isTablet ? 300 : 400,
+                    height: isMobile ? 200 : isTablet ? 300 : 400,
+                  }}>
+                    <Image
+                      src="/images/dogImage.png"
+                      alt="Cute Dog"
+                      fill
+                      style={{ objectFit: "contain", objectPosition: "bottom" }}
+                    />
+                  </div>
                 </div>
               </Paper>
 
               <Box
                 sx={{
                   position: 'absolute',
-                  top: 30,
-                  right: -175,
-                  width: 400,
-                  height: 400,
-                  zIndex: 10
+                  top: { xs: -10, sm: 0, md: 30 },
+                  right: { xs: -80, sm: -100, md: -175 },
+                  width: { xs: 150, sm: 200, md: 400 },
+                  height: { xs: 150, sm: 200, md: 400 },
+                  zIndex: 10,
+                  display: { xs: 'none', md: 'block' } // Only show on larger screens
                 }}
               >
                 <Image
@@ -132,20 +148,21 @@ export default function HomeProvider() {
           </Grid>
         </Grid>
 
-        <Grid container spacing={4} sx={{ mt: 6 }}>
+        <Grid container spacing={{ xs: 2, md: 4 }} sx={{ mt: { xs: 2, md: 6 } }}>
           <Grid item xs={12}>
-          <Typography variant="h4"
-            sx={{
-              justifySelf: "start",
-              background: "#65548f",
-              WebkitBackgroundClip: "text",
-              color: "transparent",
-              fontWeight: "bold",
-              mb: 2
-            }}
-          >
-            How it works:
-          </Typography>
+            <Typography variant="h4"
+              sx={{
+                textAlign: { xs: 'center', md: 'left' },
+                background: "#65548f",
+                WebkitBackgroundClip: "text",
+                color: "transparent",
+                fontWeight: "bold",
+                mb: 2,
+                fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' }
+              }}
+            >
+              How it works:
+            </Typography>
           </Grid>
 
           {[
@@ -165,25 +182,24 @@ export default function HomeProvider() {
               icon: '🐾'
             }
           ].map((step, index) => (
-            <Grid item xs={12} md={4} key={index}>
+            <Grid item xs={12} sm={6} md={4} key={index}>
               <Paper
                 elevation={3}
                 sx={{
-                  p: 3,
+                  p: { xs: 2, md: 3 },
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   borderRadius: '1rem',
                   bgcolor: 'rgba(255, 255, 255, 0.9)',
+                  transition: 'transform 0.3s ease',
                   '&:hover': {
-                    transform: 'translateY(-5px) scale(1.1)',
-                    
-                    transition: 'transform 0.3s ease'
+                    transform: { xs: 'translateY(-3px) scale(1.03)', md: 'translateY(-5px) scale(1.1)' },
                   }
                 }}
               >
-                <Typography variant="h1" sx={{ fontSize: '4rem', mb: 1 }}>
+                <Typography variant="h1" sx={{ fontSize: { xs: '3rem', md: '4rem' }, mb: 1 }}>
                   {step.icon}
                 </Typography>
                 <Typography
@@ -191,89 +207,60 @@ export default function HomeProvider() {
                   sx={{
                     fontWeight: 'bold',
                     mb: 2,
-                    color: "#d6336c"
+                    color: "#d6336c",
+                    fontSize: { xs: '1rem', md: '1.25rem' },
+                    textAlign: 'center'
                   }}
                 >
                   {step.title}
                 </Typography>
-                <Typography sx={{ textAlign: 'center' }}>
+                <Typography sx={{ textAlign: 'center', fontSize: { xs: '0.875rem', md: '1rem' } }}>
                   {step.description}
                 </Typography>
-
-      
               </Paper>
-
-
-
             </Grid>
-            
           ))}
         </Grid>
         
         {/* Added Credits Section */}
-        <Box sx={{ mt: 8, mb: 4, textAlign: 'center' }}>
+        <Box sx={{ mt: { xs: 4, md: 8 }, mb: 4, textAlign: 'center' }}>
           <Typography variant="h4"
             sx={{
-              justifySelf: "start",
               background: "#65548f",
               WebkitBackgroundClip: "text",
               color: "transparent",
               fontWeight: "bold",
-              mb: 2
+              mb: 2,
+              fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' }
             }}
           >
             Made by:
           </Typography>
           <Stack
             direction={{ xs: "column", sm: "row" }}
-            spacing={3}
+            spacing={{ xs: 1, md: 3 }}
             justifyContent="center"
+            alignItems="center"
             flexWrap="wrap"
+            useFlexGap
+            sx={{ px: 2 }}
           >
-            <Typography variant="h5"
-              sx={{
-                justifySelf: "start",
-                background: "linear-gradient(to right, #a592d6, #65548f)",
-                WebkitBackgroundClip: "text",
-                color: "transparent",
-                fontWeight: "bold",
-              }}>
-              Musa Ahmed
-            </Typography>
-            <Typography variant="h5"
-              sx={{
-                justifySelf: "start",
-                background: "linear-gradient(to right, #a592d6, #65548f)",
-                WebkitBackgroundClip: "text",
-                color: "transparent",
-                fontWeight: "bold",
-              }}>
-              Mujtaba Ali
-            </Typography>
-            <Typography variant="h5"
-              sx={{
-                justifySelf: "start",
-                background: "linear-gradient(to right, #a592d6, #65548f)",
-                WebkitBackgroundClip: "text",
-                color: "transparent",
-                fontWeight: "bold",
-              }}>
-              Andrei Florea
-            </Typography>
-            <Typography variant="h5"
-              sx={{
-                justifySelf: "start",
-                background: "linear-gradient(to right, #a592d6, #65548f)",
-                WebkitBackgroundClip: "text",
-                color: "transparent",
-                fontWeight: "bold",
-              }}>
-              Karin Ocheretny
-            </Typography>
+            {['Musa Ahmed', 'Mujtaba Ali', 'Andrei Florea', 'Karin Ocheretny'].map((name, index) => (
+              <Typography key={index} variant="h5"
+                sx={{
+                  background: "linear-gradient(to right, #a592d6, #65548f)",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent",
+                  fontWeight: "bold",
+                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                  my: { xs: 0.5, sm: 0 }
+                }}>
+                {name}
+              </Typography>
+            ))}
           </Stack>
         </Box>
       </Container>
     </Box>
-
   )
 }

@@ -156,7 +156,7 @@ export default function FormProvider() {
         <Box
             sx={{
                 width: "100%",
-                height: "100vh",
+                minHeight: "100vh", // Changed from fixed height to minHeight
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -165,8 +165,9 @@ export default function FormProvider() {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
-                padding: "2rem",
-                position: "relative"
+                padding: { xs: "1rem", md: "2rem" }, // Responsive padding
+                position: "relative",
+                overflow: "auto" // Enable scrolling if content overflows
             }}
         >
             {isLoading && (
@@ -195,17 +196,28 @@ export default function FormProvider() {
                 </Box>
             )}
 
-            <Box sx={{ width: '100%', maxWidth: '1000px'}}>
+            <Box sx={{ 
+                width: '100%', 
+                maxWidth: '1000px', 
+                px: { xs: 1, sm: 2 },
+                mt: { xs: 2, md: 3 }
+            }}>
                 <Stepper
                     activeStep={activeStep}
                     sx={{
-                        padding: '15px',
+                        padding: { xs: '6px', sm: '8px', md: '15px' }, // Reduced padding on small screens
                         backgroundColor: 'rgba(255, 255, 255, 0.1)',
                         borderRadius: '8px',
                         boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)',
+                        width: '100%', // Ensure full width
+                        '& .MuiStepConnector-root': {
+                            flex: 1, // Allow connector to stretch
+                            minWidth: 'auto', // Remove min width
+                        },
                         '& .MuiStepIcon-root': {
                             color: '#FFFFFF',
                             filter: 'drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.3))',
+                            fontSize: { xs: '0.8rem', sm: '1rem', md: '1.25rem', lg: '1.5rem' }, // Smaller icons on smaller screens
                             '&.Mui-active': {
                                 color: '#FFEFFD',
                                 filter: 'drop-shadow(0px 3px 5px rgba(102, 15, 129, 0.5))',
@@ -215,14 +227,29 @@ export default function FormProvider() {
                                 filter: 'drop-shadow(0px 2px 4px rgba(255, 255, 255, 0.3))',
                             },
                         },
+                        '& .MuiStep-root': {
+                            padding: 0, // Remove step padding
+                            flex: 1, // Make each step take equal space
+                            minWidth: 'auto', // Remove min width
+                        },
+                        '& .MuiStepLabel-root': {
+                            padding: { xs: 0, sm: '0 2px' }, // Minimal padding
+                            flexDirection: 'column',
+                        },
                         '& .MuiStepConnector-line': {
                             boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
+                            minHeight: { xs: '1px', md: '2px' }, // Thinner lines on mobile
                         },
+                        '& .MuiStepLabel-iconContainer': {
+                            paddingRight: 0, // Remove right padding from icon container
+                        }
                     }}
                 >
                     {steps.map((label) => (
                         <Step key={label}>
-                            <StepLabel></StepLabel>
+                            <StepLabel StepIconProps={{ sx: { width: '100%' } }}>
+                                {/* No label text */}
+                            </StepLabel>
                         </Step>
                     ))}
                 </Stepper>
@@ -232,12 +259,13 @@ export default function FormProvider() {
                 <Box
                     sx={{
                         width: '100%',
-                        height: '70vh',
+                        minHeight: { xs: '60vh', md: '70vh' }, // Responsive height
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        position: 'relative'
+                        position: 'relative',
+                        px: { xs: 2, sm: 3, md: 4 } // Responsive padding
                     }}
                 >
                     <Box sx={{
@@ -264,11 +292,12 @@ export default function FormProvider() {
 
                         <Box
                             sx={{
-                                position: 'absolute',
-                                bottom: 90,
-                                right: 10,
-                                width: 420,
-                                height: 290,
+                                position: 'relative', // Changed to relative for mobile
+                                display: { xs: 'none', md: 'block' }, // Hide speech bubble on small screens
+                                bottom: { md: 90 },
+                                right: { md: 10 },
+                                width: { md: 420 },
+                                height: { md: 290 },
                                 backgroundImage: `url("/images/pixel-speech-bubble.png")`,
                                 backgroundSize: "contain",
                                 backgroundRepeat: "no-repeat",
@@ -279,41 +308,43 @@ export default function FormProvider() {
                         </Box>
                         <Box
                             sx={{
-                                position: 'absolute',
-                                bottom: -23,
-                                lef: 0,
-                                width: 400,
-                                height: 270,
+                                position: { xs: 'static', md: 'absolute' }, // Relative on mobile, absolute on desktop
+                                bottom: { md: -23 },
+                                left: { md: 0 }, // Fixed typo in "lef" to "left"
+                                width: { xs: 200, sm: 300, md: 400 }, // Responsive width
+                                height: { xs: 150, sm: 200, md: 270 }, // Responsive height
                                 backgroundImage: `url("/images/dogImage.png")`,
                                 backgroundSize: "contain",
                                 backgroundRepeat: "no-repeat",
                                 backgroundPosition: "center",
-                                zIndex: 1
+                                zIndex: 1,
+                                mx: 'auto', // Center on mobile
+                                mt: { xs: 3, md: 0 } // Add margin top on mobile
                             }}
                         />
                         <Button
-  variant="contained"
-  onClick={handleContinue}
-  sx={{
-    background: "linear-gradient(to right, #a592d6, #65548f)",
-    color: "white",
-    fontWeight: "bold",
-    fontSize: "1.2rem",
-    textTransform: "none",
-    borderRadius: "24px",
-    paddingX: 3,
-    paddingY: 1,
-    position: 'relative', 
-    zIndex: 3, 
-    top: 50, 
-    '&:hover': {
-      background: "linear-gradient(to right, #baa7eb, #7f6dab)",
-      color: "#40207a"
-    }
-  }}
->
-  Continue
-</Button>
+                            variant="contained"
+                            onClick={handleContinue}
+                            sx={{
+                                background: "linear-gradient(to right, #a592d6, #65548f)",
+                                color: "white",
+                                fontWeight: "bold",
+                                fontSize: { xs: "1rem", md: "1.2rem" }, // Responsive font size
+                                textTransform: "none",
+                                borderRadius: "24px",
+                                paddingX: { xs: 2, md: 3 }, // Responsive padding
+                                paddingY: { xs: 0.75, md: 1 },
+                                position: 'relative', 
+                                zIndex: 3, 
+                                top: { xs: 20, md: 50 }, // Responsive top position
+                                '&:hover': {
+                                    background: "linear-gradient(to right, #baa7eb, #7f6dab)",
+                                    color: "#40207a"
+                                }
+                            }}
+                        >
+                            Continue
+                        </Button>
                     </Box>
                 </Box>
             ) : (
@@ -323,7 +354,8 @@ export default function FormProvider() {
                         maxWidth: '800px',
                         display: 'flex',
                         justifyContent: 'center',
-                        mt: 8,
+                        mt: { xs: 4, md: 8 }, // Responsive margin top
+                        px: { xs: 2, md: 0 } // Add padding on small screens
                     }}
                 >
                     {activeStep === steps.length ? (
@@ -419,18 +451,16 @@ export default function FormProvider() {
                             )}
                         </Box>
                     ) : (
-                        <Grid
-                            container
-                            spacing={3}
-                            justifyContent="center"
-                            alignItems="center"
+                        <Box
                             sx={{
-                                transition: 'opacity 0.3s ease-in-out',
-                                width: '100%', 
-                                display: 'grid', 
-                                gridTemplateColumns: 'repeat(2, 1fr)', 
-                                maxWidth: '800px', 
-                                margin: '0 auto', 
+                                width: '100%',
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(2, 1fr)', // Always 2 columns on all screen sizes
+                                gridTemplateRows: 'repeat(2, auto)', // 2 rows
+                                gap: { xs: 1, sm: 2, md: 3, lg: 4 }, // Progressive gap sizes
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                margin: '0 auto'
                             }}
                         >
                             {getCurrentImages().map((imageUrl, index) => (
@@ -440,13 +470,29 @@ export default function FormProvider() {
                                         display: 'flex',
                                         justifyContent: 'center',
                                         alignItems: 'center',
+                                        width: '100%', // Use full width of grid cell
+                                        aspectRatio: '1/1' // Maintain square aspect ratio
                                     }}
                                 >
                                     <Paper
                                         onClick={() => handleClick(imageUrl)}
                                         sx={{
-                                            width: "350px", 
-                                            height: "350px", 
+                                            width: { 
+                                                xs: 'calc(45vw - 0px)', // Smaller on mobile but still 2 per row
+                                                sm: 'calc(40vw - 20px)',
+                                                md: '280px',
+                                                lg: '330px',
+                                                xl: '380px'
+                                            },
+                                            height: { 
+                                                xs: 'calc(45vw - 0px)', // Keep aspect ratio 1:1
+                                                sm: 'calc(40vw - 20px)',
+                                                md: '280px',
+                                                lg: '330px',
+                                                xl: '380px'
+                                            },
+                                            maxWidth: '450px',
+                                            maxHeight: '450px',
                                             backgroundColor: 'white',
                                             backgroundImage: loadedImages[imageUrl] && !errorImages[imageUrl] ? `url(${imageUrl})` : 'none',
                                             backgroundSize: "cover",
@@ -456,13 +502,13 @@ export default function FormProvider() {
                                             display: 'flex',
                                             justifyContent: 'center',
                                             alignItems: 'center',
-                                            borderRadius: 2,
+                                            borderRadius: { xs: 1, md: 2 }, // Smaller radius on mobile
                                             cursor: 'pointer',
                                             transition: 'opacity 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease',
                                             opacity: clicked ? 0 : fadeIn ? 1 : fadeOut ? 0 : 1,
                                             '&:hover': {
                                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                                                transform: 'scale(1.1)',
+                                                transform: 'scale(1.05)',
                                             }
                                         }}
                                         elevation={2}
@@ -485,7 +531,7 @@ export default function FormProvider() {
                                     </Paper>
                                 </Box>
                             ))}
-                        </Grid>
+                        </Box>
                     )}
                 </Box>
             )}
@@ -495,10 +541,11 @@ export default function FormProvider() {
                     <Box
                         sx={{
                             position: 'absolute',
-                            bottom: 100,  // Increased from 120 to move up
-                            right: 100,   // Increased from 80 to move left
-                            width: 320,
-                            height: 190,
+                            display: { xs: 'none', md: 'block' }, // Hide on mobile
+                            bottom: { md: 100 },
+                            right: { md: 100 },
+                            width: { md: 320 },
+                            height: { md: 190 },
                             backgroundImage: `url("/images/pixel-speech-bubble.png")`,
                             backgroundSize: "contain",
                             backgroundRepeat: "no-repeat",
@@ -510,10 +557,11 @@ export default function FormProvider() {
                     <Box
                         sx={{
                             position: 'absolute',
+                            display: { xs: 'none', md: 'block' }, // Hide on mobile
                             bottom: 0,
                             right: 0,
-                            width: 300,
-                            height: 170,
+                            width: { md: 300 },
+                            height: { md: 170 },
                             backgroundImage: `url("/images/dogImage.png")`,
                             backgroundSize: "contain",
                             backgroundRepeat: "no-repeat",
