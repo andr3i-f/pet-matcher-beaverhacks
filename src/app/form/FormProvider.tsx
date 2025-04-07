@@ -303,9 +303,9 @@ export default function FormProvider() {
     borderRadius: "24px",
     paddingX: 3,
     paddingY: 1,
-    position: 'relative', // or 'absolute' if you want to control placement
-    zIndex: 3, // 👈 higher than the speech bubble!
-    top: 50, // adjust or remove if needed
+    position: 'relative', 
+    zIndex: 3, 
+    top: 50, 
     '&:hover': {
       background: "linear-gradient(to right, #baa7eb, #7f6dab)",
       color: "#40207a"
@@ -426,20 +426,27 @@ export default function FormProvider() {
                             alignItems="center"
                             sx={{
                                 transition: 'opacity 0.3s ease-in-out',
+                                width: '100%', 
+                                display: 'grid', 
+                                gridTemplateColumns: 'repeat(2, 1fr)', 
+                                maxWidth: '800px', 
+                                margin: '0 auto', 
                             }}
                         >
                             {getCurrentImages().map((imageUrl, index) => (
-                                <Grid
-                                    item
-                                    xs={6}
+                                <Box
                                     key={index}
-                                    sx={{ display: 'flex', justifyContent: 'center' }}
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}
                                 >
                                     <Paper
                                         onClick={() => handleClick(imageUrl)}
                                         sx={{
-                                            width: "24vw",
-                                            height: "29vh",
+                                            width: "350px", 
+                                            height: "350px", 
                                             backgroundColor: 'white',
                                             backgroundImage: loadedImages[imageUrl] && !errorImages[imageUrl] ? `url(${imageUrl})` : 'none',
                                             backgroundSize: "cover",
@@ -450,7 +457,6 @@ export default function FormProvider() {
                                             justifyContent: 'center',
                                             alignItems: 'center',
                                             borderRadius: 2,
-                                            //mb: 2,
                                             cursor: 'pointer',
                                             transition: 'opacity 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease',
                                             opacity: clicked ? 0 : fadeIn ? 1 : fadeOut ? 0 : 1,
@@ -477,7 +483,7 @@ export default function FormProvider() {
                                             <Typography variant="body2" color="textSecondary">Error loading image</Typography>
                                         )}
                                     </Paper>
-                                </Grid>
+                                </Box>
                             ))}
                         </Grid>
                     )}
